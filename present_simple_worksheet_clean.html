@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Present Simple — English Grammar (A1-A2)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-1: #C5C9B8;
+            --color-2: #B5BDA8;
+            --color-3: #7A8B6E;
+            --color-4: #A8A870;
+            --color-5: #E2E0D8;
+            --color-bg: #F5F3EE;
+            --color-card: #FFFFFF;
+            --color-text: #2C3E50;
+            --color-success: #4A7A4A;
+            --color-error: #9E4A4A;
+            --color-chalk: #F8F9FA;
+            --color-board: #2D3B32;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.5;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px 30px;
+            background: linear-gradient(135deg, var(--color-3), var(--color-4));
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        header h1 {
+            font-family: 'Outfit', 'Inter', sans-serif;
+            font-size: 2.8em;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+
+        header h2 {
+            font-size: 1.25em;
+            font-weight: 500;
+            opacity: 0.95;
+            letter-spacing: 0.2px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 35px 20px;
+            flex: 1;
+            width: 100%;
+        }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn-pdf {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95em;
+            font-weight: 600;
+            padding: 11px 22px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: var(--color-3);
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .btn-pdf:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            background: #6D7E61;
+        }
+
+        .btn-pdf.secondary {
+            background: var(--color-4);
+        }
+
+        .btn-pdf.secondary:hover {
+            background: #999960;
+        }
+
+        .btn-pdf.blackboard-toggle {
+            background: var(--color-board);
+        }
+
+        .btn-pdf.blackboard-toggle:hover {
+            background: #202B25;
+        }
+
+        /* Teacher Blackboard Section */
+        .blackboard-wrapper {
+            background: var(--color-board);
+            border: 10px solid #5C4033;
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 35px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 8px 20px rgba(0,0,0,0.12);
+            color: var(--color-chalk);
+            position: relative;
+        }
+
+        .blackboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .blackboard-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.35em;
+            font-weight: 600;
+            color: #FFE082;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .blackboard-toolbar {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .chalk-btn {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.2s;
+        }
+
+        .chalk-btn:hover, .chalk-btn.active {
+            background: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        .chalk-color {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: transform 0.2s;
+        }
+
+        .chalk-color.active {
+            border-color: white;
+            transform: scale(1.15);
+        }
+
+        .blackboard-canvas-container {
+            width: 100%;
+            background: transparent;
+            border-radius: 6px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #blackboardCanvas {
+            width: 100%;
+            height: 220px;
+            cursor: crosshair;
+            display: block;
+        }
+
+        /* Task Cards */
+        .task-card {
+            background: var(--color-card);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 16px rgba(122, 139, 110, 0.12);
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+            border: 1px solid var(--color-1);
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .task-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(122, 139, 110, 0.2);
+        }
+
+        .task-number {
+            position: absolute;
+            top: -13px;
+            left: 20px;
+            background: var(--color-3);
+            color: white;
+            padding: 3px 16px;
+            border-radius: 8px;
+            font-size: 0.85em;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .drawing-area {
+            flex: 0 0 160px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 5px;
+        }
+
+        .drawing-area svg {
+            width: 140px;
+            height: 140px;
+        }
+
+        .task-content {
+            flex: 1;
+        }
+
+        .task-text {
+            font-size: 1.15em;
+            font-weight: 600;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            color: #1A252C;
+        }
+
+        .grammar-prompt {
+            color: #4A5568;
+            font-size: 1.05em;
+            margin-bottom: 18px;
+            font-weight: 400;
+            background: #F8F7F4;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border-left: 3px solid var(--color-3);
+        }
+
+        .answer-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .answer-input {
+            font-family: 'Inter', sans-serif;
+            font-size: 1em;
+            font-weight: 500;
+            padding: 9px 14px;
+            border: 2px solid var(--color-2);
+            border-radius: 10px;
+            width: 220px;
+            outline: none;
+            transition: border-color 0.2s;
+            background: var(--color-bg);
+            color: var(--color-text);
+        }
+
+        .answer-input:focus {
+            border-color: var(--color-3);
+            background: white;
+        }
+
+        .btn {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            padding: 9px 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-check {
+            background: var(--color-3);
+            color: white;
+        }
+
+        .btn-check:hover {
+            background: #6A7B5E;
+        }
+
+        .btn-solution {
+            background: var(--color-4);
+            color: white;
+            display: none;
+        }
+
+        .btn-solution:hover {
+            background: #95955B;
+        }
+
+        .btn-solution.visible {
+            display: inline-block;
+        }
+
+        .btn-draw {
+            background: #5E8193;
+            color: white;
+        }
+
+        .btn-draw:hover {
+            background: #4E6F80;
+        }
+
+        .result-message {
+            font-size: 0.95em;
+            font-weight: 600;
+            margin-top: 12px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .result-message.correct {
+            display: block;
+            background: #EAF2E8;
+            color: var(--color-success);
+            border: 1px solid #C2DCBD;
+        }
+
+        .result-message.incorrect {
+            display: block;
+            background: #FBEAEA;
+            color: var(--color-error);
+            border: 1px solid #ECC4C4;
+        }
+
+        .solution-box {
+            display: none;
+            margin-top: 14px;
+            padding: 14px 18px;
+            background: var(--color-5);
+            border-radius: 10px;
+            border-left: 4px solid var(--color-3);
+            font-size: 0.95em;
+            line-height: 1.6;
+            color: #2D3748;
+        }
+
+        .solution-box.visible {
+            display: block;
+        }
+
+        .solution-box strong {
+            color: var(--color-3);
+        }
+
+        /* Student Draft Box */
+        .user-solution {
+            display: none;
+            margin-top: 18px;
+            padding: 18px;
+            background: var(--color-bg);
+            border-radius: 12px;
+            border: 1px solid var(--color-2);
+        }
+
+        .user-solution.visible {
+            display: block;
+        }
+
+        .user-solution h4 {
+            margin-bottom: 12px;
+            color: var(--color-3);
+            font-size: 1.05em;
+            font-weight: 600;
+        }
+
+        .solution-canvas-container {
+            border: 1px solid var(--color-2);
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+            margin-bottom: 10px;
+        }
+
+        .solution-canvas {
+            display: block;
+            width: 100%;
+            max-width: 600px;
+            height: 160px;
+            cursor: crosshair;
+        }
+
+        .solution-toolbar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .tool-btn {
+            width: 34px;
+            height: 34px;
+            border: 1px solid var(--color-2);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1em;
+            background: white;
+        }
+
+        .tool-btn.active {
+            border-color: var(--color-3);
+            background: var(--color-1);
+        }
+
+        .color-picker {
+            display: flex;
+            gap: 6px;
+        }
+
+        .color-option {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .color-option.active {
+            border-color: var(--color-text);
+            transform: scale(1.15);
+        }
+
+        .brush-size {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+
+        .brush-size input[type="range"] {
+            width: 70px;
+        }
+
+        .btn-close-solution {
+            background: var(--color-error);
+            color: white;
+            margin-top: 8px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 24px 20px;
+            background: var(--color-3);
+            color: white;
+            font-size: 0.95em;
+            font-weight: 500;
+            margin-top: 20px;
+        }
+
+        @media print {
+            .controls, .answer-section, .btn-draw, .btn-close-solution, .solution-toolbar, .blackboard-toolbar {
+                display: none !important;
+            }
+            .task-card, .blackboard-wrapper {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+            .user-solution {
+                display: block !important;
+                page-break-inside: avoid;
+            }
+            body {
+                background: white;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .task-card {
+                flex-direction: column;
+            }
+            .drawing-area {
+                flex: none;
+                width: 100%;
+            }
+            .answer-section {
+                justify-content: center;
+            }
+            header h1 {
+                font-size: 2.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Present Simple Practice</h1>
+    <h2>English Grammar — Teenagers (A1-A2)</h2>
+</header>
+
+<div class="container">
+
+    <div class="controls">
+        <button class="btn-pdf" onclick="window.print()">📄 Print / PDF</button>
+        <button class="btn-pdf secondary" onclick="showAllSolutions()">✍️ Show All Drafts</button>
+        <button class="btn-pdf blackboard-toggle" onclick="clearTeacherBoard()">🧹 Clear Teacher Board</button>
+    </div>
+
+    <!-- TEACHER BLACKBOARD MECHANIC -->
+    <div class="blackboard-wrapper">
+        <div class="blackboard-header">
+            <div class="blackboard-title">
+                <span>🎓 Teacher's Board / Hints</span>
+            </div>
+            <div class="blackboard-toolbar">
+                <button class="chalk-btn active" id="chalkPencil" onclick="setBoardTool('pencil')">✏️ Chalk</button>
+                <button class="chalk-btn" id="chalkEraser" onclick="setBoardTool('eraser')">🧹 Eraser</button>
+                <div style="display: flex; gap: 6px; align-items: center; margin: 0 5px;">
+                    <div class="chalk-color active" style="background: #F8F9FA;" onclick="setBoardColor('#F8F9FA', this)"></div>
+                    <div class="chalk-color" style="background: #FFE082;" onclick="setBoardColor('#FFE082', this)"></div>
+                    <div class="chalk-color" style="background: #80CBC4;" onclick="setBoardColor('#80CBC4', this)"></div>
+                    <div class="chalk-color" style="background: #FFAB91;" onclick="setBoardColor('#FFAB91', this)"></div>
+                </div>
+                <div class="brush-size" style="color: white;">
+                    <span>Size:</span>
+                    <input type="range" id="boardSize" min="2" max="12" value="4" onchange="setBoardSize(this.value)">
+                </div>
+            </div>
+        </div>
+        <div class="blackboard-canvas-container">
+            <canvas id="blackboardCanvas" width="950" height="220"></canvas>
+        </div>
+    </div>
+
+    <div id="worksheet">
+
+        <!-- Task 1 -->
+        <div class="task-wrapper" data-task="1">
+            <div class="task-card">
+                <div class="task-number">Task 1</div>
+                <div class="drawing-area">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="100" cy="100" r="70" fill="none" stroke="#7A8B6E" stroke-width="4"/>
+                        <circle cx="100" cy="100" r="5" fill="#3A3A3A"/>
+                        <line x1="100" y1="100" x2="100" y2="50" stroke="#3A3A3A" stroke-width="4" stroke-linecap="round"/>
+                        <line x1="100" y1="100" x2="135" y2="100" stroke="#3A3A3A" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M 100 20 L 100 10 M 180 100 L 190 100 M 100 180 L 100 190 M 20 100 L 10 100" stroke="#A8A870" stroke-width="3"/>
+                    </svg>
+                </div>
+                <div class="task-content">
+                    <p class="task-text">1. Fill in the correct form of the verb:</p>
+                    <div class="grammar-prompt">Every morning, Alex ________ (wake) up at 7:00 AM.</div>
+                    <div class="answer-section">
+                        <input type="text" class="answer-input" id="answer1" placeholder="Your answer">
+                        <button class="btn btn-check" onclick="checkAnswer(1, ['wakes', 'wakes up'])">Check</button>
+                        <button class="btn btn-solution" id="solBtn1" onclick="showSolution(1)">Show Answer</button>
+                        <button class="btn btn-draw" id="drawBtn1" onclick="toggleDrawing(1)">✍️ Notes</button>
+                    </div>
+                    <div class="result-message" id="result1"></div>
+                    <div class="solution-box" id="solution1">
+                        <strong>Rule:</strong> For <i>he / she / it</i> in Present Simple, add <b>-s / -es</b> to the verb.<br>
+                        <strong>Answer:</strong> <b>wakes</b> (or <i>wakes up</i>)
+                    </div>
+                    
+                    <div class="user-solution" id="userSol1">
+                        <h4>✍️ Student's Draft / Notes:</h4>
+                        <div class="solution-toolbar">
+                            <div class="tool-btn active" onclick="setTool(1, 'pencil')" id="tool1Pencil">✏️</div>
+                            <div class="tool-btn" onclick="setTool(1, 'eraser')" id="tool1Eraser">🧹</div>
+                            <div class="color-picker">
+                                <div class="color-option active" style="background: #3A3A3A" onclick="setColor(1, '#3A3A3A', this)"></div>
+                                <div class="color-option" style="background: #7A8B6E" onclick="setColor(1, '#7A8B6E', this)"></div>
+                                <div class="color-option" style="background: #A8A870" onclick="setColor(1, '#A8A870', this)"></div>
+                                <div class="color-option" style="background: #9E4A4A" onclick="setColor(1, '#9E4A4A', this)"></div>
+                            </div>
+                            <div class="brush-size">
+                                <span>Size:</span>
+                                <input type="range" id="size1" min="1" max="10" value="3" onchange="setSize(1, this.value)">
+                                <span id="sizeVal1">3px</span>
+                            </div>
+                            <button class="btn" onclick="clearSolution(1)">Clear</button>
+                        </div>
+                        <div class="solution-canvas-container">
+                            <canvas id="canvas1" class="solution-canvas" width="600" height="160"></canvas>
+                        </div>
+                        <button class="btn btn-close-solution" onclick="toggleDrawing(1)">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Task 2 -->
+        <div class="task-wrapper" data-task="2">
+            <div class="task-card">
+                <div class="task-number">Task 2</div>
+                <div class="drawing-area">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="40" y="40" width="120" height="120" rx="15" fill="none" stroke="#7A8B6E" stroke-width="4"/>
+                        <circle cx="100" cy="100" r="25" fill="#A8A870"/>
+                        <line x1="70" y1="70" x2="130" y2="130" stroke="#9E4A4A" stroke-width="5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="task-content">
+                    <p class="task-text">2. Make the sentence negative:</p>
+                    <div class="grammar-prompt">They like playing video games on weekdays.</div>
+                    <div class="answer-section">
+                        <input type="text" class="answer-input" id="answer2" placeholder="Your answer" style="width: 280px;">
+                        <button class="btn btn-check" onclick="checkAnswer(2, ['they don't like', 'they do not like', 'don't like', 'do not like'])">Check</button>
+                        <button class="btn btn-solution" id="solBtn2" onclick="showSolution(2)">Show Answer</button>
+                        <button class="btn btn-draw" id="drawBtn2" onclick="toggleDrawing(2)">✍️ Notes</button>
+                    </div>
+                    <div class="result-message" id="result2"></div>
+                    <div class="solution-box" id="solution2">
+                        <strong>Rule:</strong> Use <b>don't (do not)</b> for <i>I / you / we / they</i> in negative sentences.<br>
+                        <strong>Answer:</strong> <b>They don't like</b> playing video games on weekdays.
+                    </div>
+                    
+                    <div class="user-solution" id="userSol2">
+                        <h4>✍️ Student's Draft / Notes:</h4>
+                        <div class="solution-toolbar">
+                            <div class="tool-btn active" onclick="setTool(2, 'pencil')" id="tool2Pencil">✏️</div>
+                            <div class="tool-btn" onclick="setTool(2, 'eraser')" id="tool2Eraser">🧹</div>
+                            <div class="color-picker">
+                                <div class="color-option active" style="background: #3A3A3A" onclick="setColor(2, '#3A3A3A', this)"></div>
+                                <div class="color-option" style="background: #7A8B6E" onclick="setColor(2, '#7A8B6E', this)"></div>
+                                <div class="color-option" style="background: #A8A870" onclick="setColor(2, '#A8A870', this)"></div>
+                                <div class="color-option" style="background: #9E4A4A" onclick="setColor(2, '#9E4A4A', this)"></div>
+                            </div>
+                            <div class="brush-size">
+                                <span>Size:</span>
+                                <input type="range" id="size2" min="1" max="10" value="3" onchange="setSize(2, this.value)">
+                                <span id="sizeVal2">3px</span>
+                            </div>
+                            <button class="btn" onclick="clearSolution(2)">Clear</button>
+                        </div>
+                        <div class="solution-canvas-container">
+                            <canvas id="canvas2" class="solution-canvas" width="600" height="160"></canvas>
+                        </div>
+                        <button class="btn btn-close-solution" onclick="toggleDrawing(2)">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Task 3 -->
+        <div class="task-wrapper" data-task="3">
+            <div class="task-card">
+                <div class="task-number">Task 3</div>
+                <div class="drawing-area">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <text x="100" y="135" font-size="110" font-family="'Outfit', sans-serif" font-weight="bold" fill="#7A8B6E" text-anchor="middle">?</text>
+                    </svg>
+                </div>
+                <div class="task-content">
+                    <p class="task-text">3. Form a question for this answer:</p>
+                    <div class="grammar-prompt">"Does your sister live in London?" -> "Yes, she ________."</div>
+                    <div class="answer-section">
+                        <input type="text" class="answer-input" id="answer3" placeholder="Your answer">
+                        <button class="btn btn-check" onclick="checkAnswer(3, ['does'])">Check</button>
+                        <button class="btn btn-solution" id="solBtn3" onclick="showSolution(3)">Show Answer</button>
+                        <button class="btn btn-draw" id="drawBtn3" onclick="toggleDrawing(3)">✍️ Notes</button>
+                    </div>
+                    <div class="result-message" id="result3"></div>
+                    <div class="solution-box" id="solution3">
+                        <strong>Rule:</strong> Short answer for "Does she...?" is "Yes, she <b>does</b>." / "No, she <b>doesn't</b>."<br>
+                        <strong>Answer:</strong> <b>does</b>
+                    </div>
+                    
+                    <div class="user-solution" id="userSol3">
+                        <h4>✍️ Student's Draft / Notes:</h4>
+                        <div class="solution-toolbar">
+                            <div class="tool-btn active" onclick="setTool(3, 'pencil')" id="tool3Pencil">✏️</div>
+                            <div class="tool-btn" onclick="setTool(3, 'eraser')" id="tool3Eraser">🧹</div>
+                            <div class="color-picker">
+                                <div class="color-option active" style="background: #3A3A3A" onclick="setColor(3, '#3A3A3A', this)"></div>
+                                <div class="color-option" style="background: #7A8B6E" onclick="setColor(3, '#7A8B6E', this)"></div>
+                                <div class="color-option" style="background: #A8A870" onclick="setColor(3, '#A8A870', this)"></div>
+                                <div class="color-option" style="background: #9E4A4A" onclick="setColor(3, '#9E4A4A', this)"></div>
+                            </div>
+                            <div class="brush-size">
+                                <span>Size:</span>
+                                <input type="range" id="size3" min="1" max="10" value="3" onchange="setSize(3, this.value)">
+                                <span id="sizeVal3">3px</span>
+                            </div>
+                            <button class="btn" onclick="clearSolution(3)">Clear</button>
+                        </div>
+                        <div class="solution-canvas-container">
+                            <canvas id="canvas3" class="solution-canvas" width="600" height="160"></canvas>
+                        </div>
+                        <button class="btn btn-close-solution" onclick="toggleDrawing(3)">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Task 4 -->
+        <div class="task-wrapper" data-task="4">
+            <div class="task-card">
+                <div class="task-number">Task 4</div>
+                <div class="drawing-area">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 40 140 Q 100 40 160 140 Z" fill="none" stroke="#7A8B6E" stroke-width="4"/>
+                        <circle cx="100" cy="70" r="15" fill="#A8A870"/>
+                        <path d="M 30 150 L 170 150" stroke="#3A3A3A" stroke-width="3"/>
+                    </svg>
+                </div>
+                <div class="task-content">
+                    <p class="task-text">4. Spelling practice (Third person -s/-es/-ies):</p>
+                    <div class="grammar-prompt">Write the 3rd person singular (he/she/it) form of the verb <b>"STUDY"</b>:</div>
+                    <div class="answer-section">
+                        <input type="text" class="answer-input" id="answer4" placeholder="Your answer">
+                        <button class="btn btn-check" onclick="checkAnswer(4, ['studies'])">Check</button>
+                        <button class="btn btn-solution" id="solBtn4" onclick="showSolution(4)">Show Answer</button>
+                        <button class="btn btn-draw" id="drawBtn4" onclick="toggleDrawing(4)">✍️ Notes</button>
+                    </div>
+                    <div class="result-message" id="result4"></div>
+                    <div class="solution-box" id="solution4">
+                        <strong>Rule:</strong> Consonant + <b>y</b> changes to <b>-ies</b> (study -> <b>studies</b>).<br>
+                        <strong>Answer:</strong> <b>studies</b>
+                    </div>
+                    
+                    <div class="user-solution" id="userSol4">
+                        <h4>✍️ Student's Draft / Notes:</h4>
+                        <div class="solution-toolbar">
+                            <div class="tool-btn active" onclick="setTool(4, 'pencil')" id="tool4Pencil">✏️</div>
+                            <div class="tool-btn" onclick="setTool(4, 'eraser')" id="tool4Eraser">🧹</div>
+                            <div class="color-picker">
+                                <div class="color-option active" style="background: #3A3A3A" onclick="setColor(4, '#3A3A3A', this)"></div>
+                                <div class="color-option" style="background: #7A8B6E" onclick="setColor(4, '#7A8B6E', this)"></div>
+                                <div class="color-option" style="background: #A8A870" onclick="setColor(4, '#A8A870', this)"></div>
+                                <div class="color-option" style="background: #9E4A4A" onclick="setColor(4, '#9E4A4A', this)"></div>
+                            </div>
+                            <div class="brush-size">
+                                <span>Size:</span>
+                                <input type="range" id="size4" min="1" max="10" value="3" onchange="setSize(4, this.value)">
+                                <span id="sizeVal4">3px</span>
+                            </div>
+                            <button class="btn" onclick="clearSolution(4)">Clear</button>
+                        </div>
+                        <div class="solution-canvas-container">
+                            <canvas id="canvas4" class="solution-canvas" width="600" height="160"></canvas>
+                        </div>
+                        <button class="btn btn-close-solution" onclick="toggleDrawing(4)">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Task 5 -->
+        <div class="task-wrapper" data-task="5">
+            <div class="task-card">
+                <div class="task-number">Task 5</div>
+                <div class="drawing-area">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="100" cy="100" r="60" fill="none" stroke="#A8A870" stroke-width="4"/>
+                        <polygon points="100,40 115,80 160,80 125,105 140,150 100,120 60,150 75,105 40,80 85,80" fill="#7A8B6E"/>
+                    </svg>
+                </div>
+                <div class="task-content">
+                    <p class="task-text">5. Choose and complete with the adverb of frequency:</p>
+                    <div class="grammar-prompt">My brother __________ (always / to be) late for school!</div>
+                    <div class="answer-section">
+                        <input type="text" class="answer-input" id="answer5" placeholder="Your answer" style="width: 200px;">
+                        <button class="btn btn-check" onclick="checkAnswer(5, ['is always'])">Check</button>
+                        <button class="btn btn-solution" id="solBtn5" onclick="showSolution(5)">Show Answer</button>
+                        <button class="btn btn-draw" id="drawBtn5" onclick="toggleDrawing(5)">✍️ Notes</button>
+                    </div>
+                    <div class="result-message" id="result5"></div>
+                    <div class="solution-box" id="solution5">
+                        <strong>Rule:</strong> Adverbs of frequency come <b>AFTER</b> the verb <i>to be</i> (am / is / are).<br>
+                        <strong>Answer:</strong> <b>is always</b>
+                    </div>
+                    
+                    <div class="user-solution" id="userSol5">
+                        <h4>✍️ Student's Draft / Notes:</h4>
+                        <div class="solution-toolbar">
+                            <div class="tool-btn active" onclick="setTool(5, 'pencil')" id="tool5Pencil">✏️</div>
+                            <div class="tool-btn" onclick="setTool(5, 'eraser')" id="tool5Eraser">🧹</div>
+                            <div class="color-picker">
+                                <div class="color-option active" style="background: #3A3A3A" onclick="setColor(5, '#3A3A3A', this)"></div>
+                                <div class="color-option" style="background: #7A8B6E" onclick="setColor(5, '#7A8B6E', this)"></div>
+                                <div class="color-option" style="background: #A8A870" onclick="setColor(5, '#A8A870', this)"></div>
+                                <div class="color-option" style="background: #9E4A4A" onclick="setColor(5, '#9E4A4A', this)"></div>
+                            </div>
+                            <div class="brush-size">
+                                <span>Size:</span>
+                                <input type="range" id="size5" min="1" max="10" value="3" onchange="setSize(5, this.value)">
+                                <span id="sizeVal5">3px</span>
+                            </div>
+                            <button class="btn" onclick="clearSolution(5)">Clear</button>
+                        </div>
+                        <div class="solution-canvas-container">
+                            <canvas id="canvas5" class="solution-canvas" width="600" height="160"></canvas>
+                        </div>
+                        <button class="btn btn-close-solution" onclick="toggleDrawing(5)">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    <p>English Grammar Worksheets • Present Simple (A1-A2)</p>
+</footer>
+
+<script>
+// Blackboard Engine
+const boardCanvas = document.getElementById('blackboardCanvas');
+const boardCtx = boardCanvas.getContext('2d');
+let boardDrawing = false;
+let boardTool = 'pencil';
+let boardColor = '#F8F9FA';
+let boardSize = 4;
+
+function initBlackboard() {
+    boardCanvas.width = boardCanvas.parentElement.clientWidth;
+    boardCanvas.height = 220;
+
+    boardCanvas.addEventListener('mousedown', startBoardDraw);
+    boardCanvas.addEventListener('mousemove', drawBoard);
+    boardCanvas.addEventListener('mouseup', stopBoardDraw);
+    boardCanvas.addEventListener('mouseout', stopBoardDraw);
+
+    boardCanvas.addEventListener('touchstart', (e) => {
+        const touch = e.touches[0];
+        const mouseEvent = new MouseEvent('mousedown', {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        boardCanvas.dispatchEvent(mouseEvent);
+    });
+    boardCanvas.addEventListener('touchmove', (e) => {
+        const touch = e.touches[0];
+        const mouseEvent = new MouseEvent('mousemove', {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        boardCanvas.dispatchEvent(mouseEvent);
+    });
+    boardCanvas.addEventListener('touchend', () => {
+        const mouseEvent = new MouseEvent('mouseup', {});
+        boardCanvas.dispatchEvent(mouseEvent);
+    });
+}
+
+function getBoardPos(e) {
+    const rect = boardCanvas.getBoundingClientRect();
+    return {
+        x: (e.clientX - rect.left) * (boardCanvas.width / rect.width),
+        y: (e.clientY - rect.top) * (boardCanvas.height / rect.height)
+    };
+}
+
+function startBoardDraw(e) {
+    boardDrawing = true;
+    const pos = getBoardPos(e);
+    boardCtx.beginPath();
+    boardCtx.moveTo(pos.x, pos.y);
+}
+
+function drawBoard(e) {
+    if (!boardDrawing) return;
+    const pos = getBoardPos(e);
+    
+    boardCtx.lineWidth = boardSize;
+    boardCtx.lineCap = 'round';
+    boardCtx.lineJoin = 'round';
+
+    if (boardTool === 'eraser') {
+        boardCtx.globalCompositeOperation = 'destination-out';
+    } else {
+        boardCtx.globalCompositeOperation = 'source-over';
+        boardCtx.strokeStyle = boardColor;
+    }
+
+    boardCtx.lineTo(pos.x, pos.y);
+    boardCtx.stroke();
+}
+
+function stopBoardDraw() {
+    boardDrawing = false;
+    boardCtx.beginPath();
+}
+
+function setBoardTool(tool) {
+    boardTool = tool;
+    document.getElementById('chalkPencil').classList.toggle('active', tool === 'pencil');
+    document.getElementById('chalkEraser').classList.toggle('active', tool === 'eraser');
+}
+
+function setBoardColor(color, el) {
+    boardColor = color;
+    setBoardTool('pencil');
+    document.querySelectorAll('.chalk-color').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+}
+
+function setBoardSize(val) {
+    boardSize = parseInt(val);
+}
+
+function clearTeacherBoard() {
+    boardCtx.clearRect(0, 0, boardCanvas.width, boardCanvas.height);
+}
+
+// Student Task Canvases Engine
+const canvases = {};
+const contexts = {};
+const drawingState = {
+    isDrawing: false,
+    tool: {},
+    color: {},
+    size: {}
+};
+
+function initCanvases() {
+    for (let i = 1; i <= 5; i++) {
+        const canvas = document.getElementById(`canvas${i}`);
+        if (!canvas) continue;
+        const ctx = canvas.getContext('2d');
+        canvases[i] = canvas;
+        contexts[i] = ctx;
+        drawingState.tool[i] = 'pencil';
+        drawingState.color[i] = '#3A3A3A';
+        drawingState.size[i] = 3;
+        
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        canvas.addEventListener('mousedown', (e) => startDrawing(i, e));
+        canvas.addEventListener('mousemove', (e) => draw(i, e));
+        canvas.addEventListener('mouseup', () => stopDrawing(i));
+        canvas.addEventListener('mouseout', () => stopDrawing(i));
+    }
+}
+
+function getPos(canvas, e) {
+    const rect = canvas.getBoundingClientRect();
+    return {
+        x: (e.clientX - rect.left) * (canvas.width / rect.width),
+        y: (e.clientY - rect.top) * (canvas.height / rect.height)
+    };
+}
+
+function startDrawing(taskNum, e) {
+    drawingState.isDrawing = true;
+    const ctx = contexts[taskNum];
+    const pos = getPos(canvases[taskNum], e);
+    ctx.beginPath();
+    ctx.moveTo(pos.x, pos.y);
+}
+
+function draw(taskNum, e) {
+    if (!drawingState.isDrawing) return;
+    const ctx = contexts[taskNum];
+    const pos = getPos(canvases[taskNum], e);
+    
+    ctx.lineWidth = drawingState.size[taskNum];
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    
+    if (drawingState.tool[taskNum] === 'eraser') {
+        ctx.globalCompositeOperation = 'destination-out';
+    } else {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.strokeStyle = drawingState.color[taskNum];
+    }
+    
+    ctx.lineTo(pos.x, pos.y);
+    ctx.stroke();
+}
+
+function stopDrawing(taskNum) {
+    drawingState.isDrawing = false;
+    contexts[taskNum].beginPath();
+}
+
+function toggleDrawing(taskNum) {
+    const solDiv = document.getElementById(`userSol${taskNum}`);
+    solDiv.classList.toggle('visible');
+}
+
+function setTool(taskNum, tool) {
+    drawingState.tool[taskNum] = tool;
+    document.getElementById(`tool${taskNum}Pencil`).classList.toggle('active', tool === 'pencil');
+    document.getElementById(`tool${taskNum}Eraser`).classList.toggle('active', tool === 'eraser');
+}
+
+function setColor(taskNum, color, element) {
+    drawingState.color[taskNum] = color;
+    setTool(taskNum, 'pencil');
+    document.querySelectorAll(`#userSol${taskNum} .color-option`).forEach(el => el.classList.remove('active'));
+    element.classList.add('active');
+}
+
+function setSize(taskNum, size) {
+    drawingState.size[taskNum] = parseInt(size);
+    document.getElementById(`sizeVal${taskNum}`).textContent = size + 'px';
+}
+
+function clearSolution(taskNum) {
+    const ctx = contexts[taskNum];
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, canvases[taskNum].width, canvases[taskNum].height);
+}
+
+function showAllSolutions() {
+    for (let i = 1; i <= 5; i++) {
+        document.getElementById(`userSol${i}`).classList.add('visible');
+    }
+}
+
+function checkAnswer(taskNum, correctAnswers) {
+    const input = document.getElementById('answer' + taskNum);
+    const result = document.getElementById('result' + taskNum);
+    const solBtn = document.getElementById('solBtn' + taskNum);
+    const userAnswer = input.value.trim().toLowerCase().replace(/\s+/g, ' ');
+
+    if (userAnswer === '') {
+        result.className = 'result-message incorrect';
+        result.textContent = 'Please enter an answer.';
+        return;
+    }
+
+    const isCorrect = correctAnswers.some(ans => userAnswer === ans.toLowerCase());
+
+    if (isCorrect) {
+        result.className = 'result-message correct';
+        result.textContent = '✓ Well done! Correct!';
+        solBtn.classList.remove('visible');
+        input.style.borderColor = '#4A7A4A';
+    } else {
+        result.className = 'result-message incorrect';
+        result.textContent = '✗ Not quite. Try again or view the explanation.';
+        solBtn.classList.add('visible');
+        input.style.borderColor = '#9E4A4A';
+    }
+}
+
+function showSolution(taskNum) {
+    const solBox = document.getElementById('solution' + taskNum);
+    solBox.classList.toggle('visible');
+}
+
+window.addEventListener('load', () => {
+    initBlackboard();
+    initCanvases();
+});
+
+document.querySelectorAll('.answer-input').forEach(input => {
+    input.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            const taskNum = this.id.replace('answer', '');
+            const btn = this.parentElement.querySelector('.btn-check');
+            btn.click();
+        }
+    });
+});
+</script>
+
+</body>
+</html>
